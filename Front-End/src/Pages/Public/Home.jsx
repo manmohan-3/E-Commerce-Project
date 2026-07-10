@@ -1,20 +1,17 @@
 //SHIVAAAAHHH
 import HeroSection from "../../Components/HeroSection";
-import Category from "./CategoryCard";
+import CategoryCard from "../../Components/CategoryCard";
+import Categories from "../../Components/Categories";
+import Counter from "../../Components/Counter";
 
 
 function Home(){
     return(<>
+       
         <HeroSection/>
-        <div className="container mt-5">
-            <h2 className="text-center mb-4">Shop by category</h2>
-            <Category title="Electrical"/>
-            <Category title="Lighting"/>
-            <Category title="Motors"/>
-            <Category title="Batteries"/>
-            <Category title="Switches"/>
-            <Category title="Tools"/>
-        </div>
+        <Counter/>
+        <Categories/>
+         
     </>)
 }
 export default Home;
