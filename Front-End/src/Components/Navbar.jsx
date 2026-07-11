@@ -56,7 +56,7 @@ function Navbar() {
             Login
           </Link>
 
-          <Link className="btn btn-warning" to="/register">
+          <Link className="btn btn-warning" to="/signup">
             Register
           </Link>
 
