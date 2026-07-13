@@ -8,6 +8,10 @@ function Login() {
     const [error, seterror] = useState({ LoginId: "", Password: "" });
 
     const [formData, setformData] = useState({ LoginId: "", Password: "" });
+    const handleChange=(event)=>{
+        setformData({...formData,[event.target.name]:event.target.value}),
+        seterror({...error,[event.target.name]:""})
+    }
     const handleLogin = (event) => {
 
         event.preventDefault();
@@ -35,12 +39,14 @@ function Login() {
 
                 <div className="form-group">
                     <label htmlFor="LoginId">Email or Mobile Number:</label>
-                    <input id="LoginId" type="text" value={formData.LoginId} placeholder="Enter Your Email or Mobile Number" onChange={(props) => {setformData({ ...formData, LoginId: props.target.value });seterror({...error,LoginId: ""});}} />
+                    <input name="LoginId" id="LoginId" type="text" value={formData.LoginId} placeholder="Enter Your Email or Mobile Number" 
+                    onChange={handleChange} />
                     <p>{error.LoginId}</p>
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Enter Password:</label>
-                    <input id="password" type="password" value={formData.Password} placeholder="Enter Password" onChange={(props) => {setformData({ ...formData, Password: props.target.value });seterror({...error,Password:""});}} />
+                    <input name="Password" id="password" type="password" value={formData.Password} placeholder="Enter Password" 
+                    onChange={handleChange} />
                     <p>{error.Password}</p>
                 </div>
                 <button className="login-btn">Login</button>
