@@ -41,13 +41,13 @@ function Login() {
                     <label htmlFor="LoginId">Email or Mobile Number:</label>
                     <input name="LoginId" id="LoginId" type="text" value={formData.LoginId} placeholder="Enter Your Email or Mobile Number" 
                     onChange={handleChange} />
-                    <p>{error.LoginId}</p>
+                    <p className="error">{error.LoginId}</p>
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Enter Password:</label>
                     <input name="Password" id="password" type="password" value={formData.Password} placeholder="Enter Password" 
                     onChange={handleChange} />
-                    <p>{error.Password}</p>
+                    <p className="error">{error.Password}</p>
                 </div>
                 <button className="login-btn">Login</button>
                 <div className="signup-link">
