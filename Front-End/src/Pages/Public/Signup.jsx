@@ -1,5 +1,6 @@
 //SHIVAAAHHH
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { useState } from "react";
 import "./Signup.css";
 function Signup() {
@@ -62,7 +63,13 @@ function Signup() {
             seterror(newError);
             return;
         }
-        console.log(signupData);
+        try{
+            const response=axios.dopost("http://localhost:8080/ECommerce/signup",signupData);
+            console.log(response.data);
+        }
+        catch(error){
+            console.log(error);
+        }
 
 
     }
@@ -123,7 +130,7 @@ function Signup() {
                 <div className="form-group">
                     <select name="formtype" id="formtype" value={signupData.formtype} onChange={handleChange}>
                         {/* <option value="">CHOOSE TYPE</option> */}
-                        <option value="Public">Public</option>
+                        <option value="User">User</option>
                         <option value="Vendor">Vendor</option>
                     </select>
                 </div>
