@@ -6,7 +6,7 @@ import "./Signup.css";
 function Signup() {
     const [signupData, setsignupData] = useState({
         user_name: "", Born_date: "", Mobile_number: "", Email: "", Password: "", City_name: "", State_name: "", Address:"", 
-        Country: "", Pincode: "", formtype: "", Company_name: "", Pancard: "", Bank_name: "", Account_number: "", Ifsc_code: "",
+        Country: "", Pincode: "", formtype: "user", Company_name: "", Pancard: "", Bank_name: "", Account_number: "", Ifsc_code: "",
         upi_id: "", Store_name: "", Store_details: "", Web_url: ""
     });
     const [error, seterror] = useState({
@@ -18,7 +18,7 @@ function Signup() {
         setsignupData({ ...signupData, [event.target.name]: event.target.value }),
         seterror({...error,[event.target.name]:""})
     }
-    const handleSignup=(event)=>{
+    const handleSignup=async (event)=>{
         event.preventDefault();
         const newError={
         user_name: "", Born_date: "", Mobile_number: "", Email: "", Password: "", City_name: "", State_name: "", Address:"",
@@ -26,9 +26,9 @@ function Signup() {
         upi_id: "", Store_name: "", Store_details: "", Web_url: ""
         }
         if(signupData.user_name.trim()===""){newError.user_name="Enter your name";}
-        else if(!/^[A-Za-z ]+$/.test(signupData.user_name)){newError.user_name="User name SHould have only alphbets"}
+        else if(!/^[A-Za-z ]+$/.test(signupData.user_name)){newError.user_name="User name Should have only alphbets"}
         if(signupData.Mobile_number.trim()===""){newError.Mobile_number="Enter mobile number";}
-        else if(!/^[1-0]{10}+$/.test(signupData.Mobile_number)){newError.Mobile_number="Only number with 10 digits"}
+        else if(!/^[0-9]{10}$/.test(signupData.Mobile_number)){newError.Mobile_number="Only number with 10 digits"}
         if(signupData.Email.trim()===""){newError.Email="Enter Email";}
         else if(!/^[A-Za-z0-9.%-_+]+@[A-za-z]+\.[A-za-z]{2,}$/.test(signupData.Email)){newError.Email="Use a valid Email"}
         if(signupData.Password.trim()===""){newError.Password="Enter Password";}
@@ -63,8 +63,33 @@ function Signup() {
             seterror(newError);
             return;
         }
+        const formData=new FormData();
+        formData.append("user_name",signupData.user_name);
+        formData.append("born_date",signupData.Born_date);
+        formData.append("mobile_number",signupData.Mobile_number);
+        formData.append("email",signupData.Email);
+        formData.append("password",signupData.Password);
+        formData.append("city_name",signupData.City_name);
+        formData.append("state_name",signupData.State_name);
+        formData.append("address",signupData.Address);
+        formData.append("country",signupData.Country);
+        formData.append("pincode",signupData.Pincode);
+        formData.append("formtype",signupData.formtype);
+        formData.append("company_name",signupData.Company_name);
+        formData.append("pancard",signupData.Pancard);
+        formData.append("bank_name",signupData.Bank_name);
+        formData.append("account_number",signupData.Account_number);
+        formData.append("ifsc_code",signupData.Ifsc_code);
+        formData.append("upi_id",signupData.upi_id);
+        formData.append("store_name",signupData.Store_name);
+        formData.append("store_details",signupData.Store_details);
+        formData.append("web_url",signupData.Web_url);
         try{
-            const response=axios.dopost("http://localhost:8080/ECommerce/signup",signupData);
+            for (const pair of formData.entries()) 
+            {
+            console.log(pair[0] + " = " + pair[1]);
+            }
+            const response=await axios.post("http://localhost:8080/WebContent/signup",formData);
             console.log(response.data);
         }
         catch(error){

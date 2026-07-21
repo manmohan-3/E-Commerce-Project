@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class User {
+    
     private long userId;
     private String username;
     private Date dob;
@@ -31,8 +32,9 @@ public class User {
     private Timestamp createdAt;
 
     public User() {
-
+        System.out.println("DTO");
     }
+    
 
     // setter methods
     public void setuserId(long userId) {
@@ -126,7 +128,7 @@ public class User {
     public void setcreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
-
+    //getter methods
     public long getuserId() {
         return userId;
     }

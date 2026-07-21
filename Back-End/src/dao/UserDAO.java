@@ -10,6 +10,7 @@ import util.DBConnection;
 
 public class UserDAO {
     public boolean registerUser(User user){
+        System.out.println("DAO");
         Connection con=null;
         PreparedStatement ps=null;
         try {
@@ -41,7 +42,7 @@ public class UserDAO {
         }else{
             return false;
         }
-        } catch (SQLException e){
+        } catch (Exception e){
             e.printStackTrace();
             return false;
         }finally{
