@@ -7,12 +7,14 @@ import dto.User;
 import dao.UserDAO;
 import javax.servlet.ServletException;
 import java.sql.Date;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/signup")
+@MultipartConfig
 public class SignupServlet extends HttpServlet {
     @Override
 protected void doOptions(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException {
@@ -29,7 +31,10 @@ protected void doOptions(HttpServletRequest request,HttpServletResponse response
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
         response.setHeader("Access-Control-Allow-Headers", "*");
+        //user dto object created
         User user = new User();
+        System.out.println("Content-Type = " + request.getContentType());
+        System.out.println("user_name = " + request.getParameter("user_name"));
         System.out.println("user_name = " + request.getParameter("user_name"));
         System.out.println("born_date = " + request.getParameter("born_date"));
         System.out.println("mobile_number = " + request.getParameter("mobile_number"));
@@ -55,6 +60,7 @@ protected void doOptions(HttpServletRequest request,HttpServletResponse response
         user.setstoreName(request.getParameter("store_name"));
         user.setstoreDescription(request.getParameter("store_details"));
         user.setwebsiteUrl(request.getParameter("web_url"));
+        //user dto object created
         UserDAO userdao = new UserDAO();
         boolean result = userdao.registerUser(user);
         if (result) {

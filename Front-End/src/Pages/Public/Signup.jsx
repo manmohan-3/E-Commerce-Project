@@ -6,7 +6,7 @@ import "./Signup.css";
 function Signup() {
     const [signupData, setsignupData] = useState({
         user_name: "", Born_date: "", Mobile_number: "", Email: "", Password: "", City_name: "", State_name: "", Address:"", 
-        Country: "", Pincode: "", formtype: "user", Company_name: "", Pancard: "", Bank_name: "", Account_number: "", Ifsc_code: "",
+        Country: "", Pincode: "", formtype: "User", Company_name: "", Pancard: "", Bank_name: "", Account_number: "", Ifsc_code: "",
         upi_id: "", Store_name: "", Store_details: "", Web_url: ""
     });
     const [error, seterror] = useState({
@@ -85,11 +85,7 @@ function Signup() {
         formData.append("store_details",signupData.Store_details);
         formData.append("web_url",signupData.Web_url);
         try{
-            for (const pair of formData.entries()) 
-            {
-            console.log(pair[0] + " = " + pair[1]);
-            }
-            const response=await axios.post("http://localhost:8080/WebContent/signup",formData);
+            const response = await axios.post("http://localhost:8080/WebContent/signup", formData);
             console.log(response.data);
         }
         catch(error){
